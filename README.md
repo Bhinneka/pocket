@@ -43,7 +43,7 @@ andi
 
 
 #### Author
-Wuriyanto github.com/wuriyanto48
+Wuriyanto https://github.com/wuriyanto48
 
 ##
 
