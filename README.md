@@ -5,6 +5,10 @@
 # Note !!!
 #### this project is only for the purpose of having fun with Elixir's GenServer and Elixir's Map :stuck_out_tongue_winking_eye:
 
+### Todo
+- Add `DEL` (delete command by specific index)
+- More error handling
+
 ## Installation
 
 the package can be installed
