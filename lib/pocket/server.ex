@@ -27,22 +27,6 @@ defmodule Pocket.Server do
       {:error, err} -> :gen_tcp.send(client, "Error #{err}")
         {:noreply, db}
     end
-
-    # command = String.split(packet) |> Enum.at(0)
-    #   if command === "SET" || command === "GET" do
-    #     if command === "SET" do
-    #       key = String.split(packet) |> Enum.at(1)
-    #       value = String.split(packet) |> Enum.at(2)
-    #       new_db = Map.put_new(db, key, value)
-    #       :gen_tcp.send(client, "OK\n")
-    #       {:noreply, new_db}
-    #     else
-    #       key = String.split(packet) |> Enum.at(1)
-    #       v = Map.get(db, key)
-    #       :gen_tcp.send(client, "#{v}\n")
-    #       {:noreply, db}
-    #     end
-    #   end
   end
 
   def handle_info({:tcp_closed, _socket}, db) do
