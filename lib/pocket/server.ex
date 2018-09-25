@@ -26,6 +26,8 @@ defmodule Pocket.Server do
         {:noreply, new_db}
       {:error, err} -> :gen_tcp.send(client, "Error #{err}")
         {:noreply, db}
+      _ -> :gen_tcp.send(client, "Error\n")
+        {:noreply, db}
     end
   end
 
@@ -39,18 +41,27 @@ defmodule Pocket.Server do
     {:noreply, db}
   end
 
-  defp handle_input(packet, db) when is_binary(packet) do
-      command = String.split(packet) |> Enum.at(0)
-      if command === "SET" || command === "GET" do
-        if command === "SET" do
-          key = String.split(packet) |> Enum.at(1)
-          value = String.split(packet) |> Enum.at(2)
-          new_db = Map.put_new(db, key, value)
-          {:ok, new_db, "OK"}
-        else
-          key = String.split(packet) |> Enum.at(1)
-          v = Map.get(db, key)
-          {:ok, db, v}
+  defp handle_input(packet, db) when packet |> is_binary do
+      command = packet |> String.split |> Enum.at(0) |> String.upcase
+      if command === "SET" || command === "GET" || command === "DEL" do
+        key = packet |> String.split |> Enum.at(1)
+        case command do
+          "SET" ->
+            if Map.has_key?(db, key) do
+              value = packet |> String.split |> Enum.at(2)
+              new_db = Map.replace!(db, key, value)
+              {:ok, new_db, "OK"}
+            else
+              value = packet |> String.split |> Enum.at(2)
+              new_db = Map.put_new(db, key, value)
+              {:ok, new_db, "OK"}
+            end
+          "GET" ->
+            v = Map.get(db, key)
+            {:ok, db, v}
+          "DEL" ->
+            new_db = Map.delete(db, key)
+            {:ok, new_db, "OK"}
         end
       end
   end
