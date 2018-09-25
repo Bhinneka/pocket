@@ -6,7 +6,7 @@
 #### this project is only for the purpose of having fun with Elixir's GenServer and Elixir's Map :stuck_out_tongue_winking_eye:
 
 ### Todo
-- Add `DEL` (delete command by specific `key`)
+- Handle Concurrent users
 - Add more data type support
 - More error handling
 
