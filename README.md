@@ -24,9 +24,8 @@ $ iex -S mix
 ```
 
 ## Usage
-Run iex
+Run Pocket
 ```shell
-$ iex
 iex(1)> Pocket.start([], [])
 ```
 
