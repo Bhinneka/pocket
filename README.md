@@ -7,19 +7,20 @@
 
 ### Todo
 - Add `DEL` (delete command by specific index)
+- Add more data type support
 - More error handling
 
 ## Installation
 
-the package can be installed
-by adding `pocket` to your list of dependencies in `mix.exs`:
+Clone Pocket
 
-```elixir
-def deps do
-  [
-    {:pocket, "~> 0.1.0", github: "Bhinneka/pocket"}
-  ]
-end
+```shell
+$ git clone https://github.com/Bhinneka/pocket
+```
+
+Compile Pocket
+```shell
+$ iex -S mix
 ```
 
 ## Usage
