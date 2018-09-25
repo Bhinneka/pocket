@@ -23,6 +23,15 @@ Compile Pocket
 $ iex -S mix
 ```
 
+## Configuration
+
+If you want to change Pocket's default config, Open `config.ex` inside config folder
+
+```elixir
+config :pocket, ip: {y,o,u,r,i,p}
+config :pocket, port: 8000
+```
+
 ## Usage
 Run Pocket
 ```shell
