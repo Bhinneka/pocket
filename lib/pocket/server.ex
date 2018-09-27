@@ -44,7 +44,7 @@ defmodule Pocket.Server do
   defp handle_input(packet, db) when packet |> byte_size != 0 and packet |> is_binary do
     IO.inspect byte_size(packet), label: "Packet "
       command = packet |> String.split |> Enum.at(0) |> String.upcase
-      if command === "SET" || command === "GET" || command === "DEL" do
+      if is_valid_command?(command) do
         key = packet |> String.split |> Enum.at(1)
         case command do
           "SET" ->
@@ -71,5 +71,11 @@ defmodule Pocket.Server do
 
   defp handle_input(_, _) do
     {:error, "invalid command", "\n"}
+  end
+
+  defp is_valid_command?(command) do
+    commands = ["SET", "GET", "DEL"]
+    check = fn(c) -> c == command end
+    Enum.any?(commands, check)
   end
 end
